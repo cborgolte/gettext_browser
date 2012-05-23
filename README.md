@@ -15,5 +15,5 @@ The project is thought as a proof of concept.
 
 Tested with:
 
-   	* fedora-16, Chrome, ~~Firefox~~
+   	* fedora-16, Chrome
 
