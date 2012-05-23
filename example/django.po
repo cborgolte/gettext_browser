@@ -29,8 +29,8 @@ msgstr "English"
 msgid "Italienisch"
 msgstr "Italiano"
 
-#: contacts/templates/contacts/contact_new.html:60
-#: typical msgid coming from django's blocktrans tag.
+#: contacts/templates/contacts/contact_new.html:60 typical msgid coming from
+#: django's blocktrans tag.
 msgid ""
 "\n"
 "            solar-radar GmbH<br>\n"

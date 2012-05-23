@@ -7,7 +7,9 @@ from django.http import HttpResponseForbidden, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.template import RequestContext
 
+
 POFILE = 'example/django.po'  # change to point to another gettext file
+MOFILE = 'example/django.mo'  # leave blank if you dont want to create binary data
 
 
 def show(request):
@@ -21,7 +23,9 @@ def show(request):
         msgstr = request.POST['msgstr-orig'].replace('\r', '')
         if msgstr != entry.msgstr:
             entry.msgstr = msgstr
-            pofile.save('django.po')
+            pofile.save(POFILE)
+            if MOFILE:
+                pofile.save_as_mofile(MOFILE)
         if idx < count - 1:
             idx += 1
         return redirect('{0}?idx={1}'.format(request.path, idx))
