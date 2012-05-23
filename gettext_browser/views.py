@@ -2,14 +2,20 @@
 
 
 import polib
+import signal
+import os
 
 from django.http import HttpResponseForbidden, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.template import RequestContext
 
 
-POFILE = 'example/django.po'  # change to point to another gettext file
-MOFILE = 'example/django.mo'  # leave blank if you dont want to create binary data
+# Location of .po and .mo files
+POFILE = '/path/to/djangoproject/locale/it/LC_MESSAGES/django.po'  # change to point to another gettext file
+MOFILE = '/path/to/djangoproject/locale/it/LC_MESSAGES/django.mo'  # leave blank if you dont want to create binary data
+
+# if the translation files belong to a process like gunicorn, it will be restarted by 'kill -HUP' on every change
+GUNICORN_PID = int(open('/path/to/gunicorn.pid').read().strip())  # leave blank if you dont want to restart the server
 
 
 def show(request):
@@ -26,6 +32,8 @@ def show(request):
             pofile.save(POFILE)
             if MOFILE:
                 pofile.save_as_mofile(MOFILE)
+            if GUNICORN_PID:
+                os.kill(GUNICORN_PID, signal.SIGHUP)
         if idx < count - 1:
             idx += 1
         return redirect('{0}?idx={1}'.format(request.path, idx))

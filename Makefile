@@ -5,3 +5,6 @@ pythonenv:
 
 runserver: pythonenv
 	pythonenv/bin/python manage.py runserver
+
+runserver9000: pythonenv
+	pythonenv/bin/python manage.py runserver 0.0.0.0:9000
