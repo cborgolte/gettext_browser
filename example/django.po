@@ -23,7 +23,7 @@ msgstr ""
 
 #: settings.py:54
 msgid "Englisch"
-msgstr "English"
+msgstr "Inglese"
 
 #: settings.py:55
 msgid "Italienisch"
